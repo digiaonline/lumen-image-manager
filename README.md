@@ -26,7 +26,7 @@ composer require nordsoftware/lumen-image-manager
 Add the following lines to ```bootstrap/app.php```:
 
 ```php
-$app->register('Nord\Lumen\Cloudnary\CloudinaryServiceProvider');
+$app->register('Nord\Lumen\Cloudinary\CloudinaryServiceProvider');
 ```
 
 ```php
