@@ -4,9 +4,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Nord\Lumen\ImageManager\Contracts\Image as ImageContract;
+use Nord\Lumen\ImageManager\Contracts\ImageFactory as ImageFactoryContract;
 use Nord\Lumen\ImageManager\Contracts\ImageStorage as ImageStorageContract;
 
-class DoctrineBindings extends ServiceProvider
+class DoctrineServiceProvider extends ServiceProvider
 {
 
     /**
@@ -23,14 +24,14 @@ class DoctrineBindings extends ServiceProvider
      */
     protected function registerContainerBindings(Container $container)
     {
+        $container->singleton(ImageFactoryContract::class, function () {
+            return new ImageFactory();
+        });
+
         $entityManager = $container->make(EntityManagerInterface::class);
 
         $container->singleton(ImageStorageContract::class, function () use ($entityManager) {
             return new ImageStorage($entityManager);
-        });
-
-        $container->bind(ImageContract::class, function () {
-            return new Image();
         });
     }
 }

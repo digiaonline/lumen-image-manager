@@ -17,7 +17,7 @@
         "nordsoftware/lumen-file-manager": "~0.1@dev"
     },
     "require-dev": {
-        "laravel/lumen-framework": "^5.1@dev"
+        "laravel/lumen-framework": "^5.2@dev"
     },
     "autoload": {
         "psr-4": {

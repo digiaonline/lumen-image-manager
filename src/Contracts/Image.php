@@ -29,23 +29,5 @@ interface Image
     /**
      * @return string
      */
-    public function getFilename();
-
-
-    /**
-     * @return string
-     */
     public function getFilePath();
-
-
-    /**
-     * @param File $file
-     */
-    public function setFile(File $file);
-
-
-    /**
-     * @param string $renderer
-     */
-    public function setRenderer($renderer);
 }
