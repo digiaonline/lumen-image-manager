@@ -2,6 +2,7 @@
 
 use Nord\Lumen\FileManager\Contracts\File;
 use Nord\Lumen\FileManager\Contracts\FileManager;
+use Nord\Lumen\ImageManager\Contracts\ImageFactory;
 use Nord\Lumen\ImageManager\Contracts\RendererAdapter;
 use Nord\Lumen\ImageManager\Contracts\Image as ImageContract;
 use Nord\Lumen\ImageManager\Contracts\ImageManager as ImageManagerContract;
@@ -19,6 +20,11 @@ class ImageManager implements ImageManagerContract
     private $fileManager;
 
     /**
+     * @var ImageFactory
+     */
+    private $factory;
+
+    /**
      * @var ImageStorage
      */
     private $storage;
@@ -33,11 +39,13 @@ class ImageManager implements ImageManagerContract
      * ImageManager constructor.
      *
      * @param FileManager  $fileManager
+     * @param ImageFactory $factory
      * @param ImageStorage $storage
      */
-    public function __construct(FileManager $fileManager, ImageStorage $storage)
+    public function __construct(FileManager $fileManager, ImageFactory $factory, ImageStorage $storage)
     {
         $this->fileManager = $fileManager;
+        $this->factory     = $factory;
         $this->storage     = $storage;
     }
 
@@ -49,11 +57,10 @@ class ImageManager implements ImageManagerContract
     {
         $file = $this->fileManager->saveFile($info, $name, $options);
 
-        /** @var ImageContract $image */
-        $image = app()->make(ImageContract::class);
-
-        $image->setFile($file);
-        $image->setRenderer(array_pull($options, 'renderer', ImageContract::RENDERER_CLOUDINARY));
+        $image = $this->factory->createImage(
+            $file,
+            array_pull($options, 'renderer', ImageContract::RENDERER_CLOUDINARY)
+        );
 
         if (!$this->storage->saveImage($image)) {
             throw new StorageException("Failed to insert image into database.");

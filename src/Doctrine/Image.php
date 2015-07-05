@@ -21,29 +21,15 @@ class Image implements ImageContract
 
 
     /**
-     * @inheritdoc
+     * Image constructor.
+     *
+     * @param File   $file
+     * @param string $renderer
      */
-    public function getFileId()
+    public function __construct(File $file, $renderer)
     {
-        return $this->file->getId();
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getFilename()
-    {
-        return $this->file->getFilename();
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getFilePath()
-    {
-        return $this->file->getFilePath();
+        $this->setFile($file);
+        $this->setRenderer($renderer);
     }
 
 
@@ -68,7 +54,25 @@ class Image implements ImageContract
     /**
      * @inheritdoc
      */
-    public function setFile(File $file)
+    public function getFileId()
+    {
+        return $this->file->getId();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getFilePath()
+    {
+        return $this->file->getFilePath();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    private function setFile(File $file)
     {
         $this->file = $file;
     }
@@ -77,7 +81,7 @@ class Image implements ImageContract
     /**
      * @inheritdoc
      */
-    public function setRenderer($renderer)
+    private function setRenderer($renderer)
     {
         if (empty($renderer)) {
             throw new \Exception('Image renderer cannot be empty.');

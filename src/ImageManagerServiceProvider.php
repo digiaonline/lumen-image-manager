@@ -5,6 +5,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Nord\Lumen\FileManager\Contracts\FileManager;
 use Nord\Lumen\ImageManager\Contracts\ImageManager as ImageManagerContract;
+use Nord\Lumen\ImageManager\Contracts\ImageFactory as ImageFactoryContract;
 use Nord\Lumen\ImageManager\Contracts\ImageStorage as ImageStorageContract;
 use Nord\Lumen\ImageManager\Facades\ImageManager as ImageManagerFacade;
 use Nord\Lumen\ImageManager\Adapters\Cloudinary\CloudinaryAdapter;
@@ -57,9 +58,10 @@ class ImageManagerServiceProvider extends ServiceProvider
     protected function createManager(Container $container, ConfigRepository $config)
     {
         $fileManager = $container->make(FileManager::class);
+        $factory     = $container->make(ImageFactoryContract::class);
         $storage     = $container->make(ImageStorageContract::class);
 
-        $imageManager = new ImageManager($fileManager, $storage);
+        $imageManager = new ImageManager($fileManager, $factory, $storage);
 
         $this->configureManager($imageManager, $container, $config->get('imagemanager', []));
 
