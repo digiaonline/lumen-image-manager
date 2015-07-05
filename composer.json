@@ -1,0 +1,27 @@
+{
+    "name": "nordsoftware/lumen-image-manager",
+    "description": "Image manager module for the Lumen framework.",
+    "keywords": ["laravel", "lumen", "image", "manager", "cloudinary"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christoffer Niska",
+            "email": "christofferniska@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5.9",
+        "cloudinary/cloudinary_php": "~1.1@dev",
+        "nordsoftware/lumen-doctrine": "~1.0@dev",
+        "nordsoftware/lumen-file-manager": "~0.1@dev"
+    },
+    "require-dev": {
+        "laravel/lumen-framework": "^5.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nord\\Lumen\\ImageManager\\": "src"
+        }
+    }
+}
