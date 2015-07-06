@@ -3,11 +3,17 @@
 use Nord\Lumen\Doctrine\Traits\AutoIncrements;
 use Nord\Lumen\FileManager\Contracts\File;
 use Nord\Lumen\ImageManager\Contracts\Image as ImageContract;
+use Nord\Lumen\ImageManager\Contracts\ImageManager;
 
 class Image implements ImageContract
 {
 
     use AutoIncrements;
+
+    /**
+     * @var ImageManager
+     */
+    private $manager;
 
     /**
      * @var File
@@ -26,8 +32,9 @@ class Image implements ImageContract
      * @param File   $file
      * @param string $renderer
      */
-    public function __construct(File $file, $renderer)
+    public function __construct(ImageManager $manager, File $file, $renderer)
     {
+        $this->setManager($manager);
         $this->setFile($file);
         $this->setRenderer($renderer);
     }
@@ -63,9 +70,27 @@ class Image implements ImageContract
     /**
      * @inheritdoc
      */
-    public function getFilePath()
+    public function getFilePath(array $options = [])
     {
-        return $this->file->getFilePath();
+        return $this->manager->getImagePath($this, $options);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getFileUrl(array $options = [])
+    {
+        return $this->manager->getImageUrl($this, $options);
+    }
+
+
+    /**
+     * @param ImageManager $manager
+     */
+    private function setManager($manager)
+    {
+        $this->manager = $manager;
     }
 
 

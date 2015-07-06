@@ -53,11 +53,16 @@ class ImageManager implements ImageManagerContract
     /**
      * @inheritdoc
      */
-    public function saveImage(FileInfo $info, $name, array $options = [])
+    public function saveImage(FileInfo $info, array $options = [])
     {
-        $file = $this->fileManager->saveFile($info, $name, $options);
+        if (!isset($options['disk'])) {
+            $options['disk'] = File::DISK_CLOUDINARY;
+        }
+
+        $file = $this->fileManager->saveFile($info, $options);
 
         $image = $this->factory->createImage(
+            $this,
             $file,
             array_pull($options, 'renderer', ImageContract::RENDERER_CLOUDINARY)
         );
@@ -73,9 +78,24 @@ class ImageManager implements ImageManagerContract
     /**
      * @inheritdoc
      */
-    public function getImage(File $file)
+    public function getImage($fileId)
     {
+        $file = $this->fileManager->getFile($fileId);
+
+        if ($file === null) {
+            return null;
+        }
+
         return $this->storage->getImage($file);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getImagePath(ImageContract $image, array $options = [])
+    {
+        return $this->fileManager->getFilePath($image->getFile(), $options);
     }
 
 
@@ -84,7 +104,7 @@ class ImageManager implements ImageManagerContract
      */
     public function getImageUrl(ImageContract $image, array $options = [])
     {
-        return $this->fileManager->getFileUrl($image->getFile(), $options);
+        return $this->getAdapter($image->getRenderer())->getImageUrl($image, $options);
     }
 
 
