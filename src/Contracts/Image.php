@@ -27,7 +27,17 @@ interface Image
 
 
     /**
+     * @param array $options
+     *
      * @return string
      */
-    public function getFilePath();
+    public function getFilePath(array $options = []);
+
+
+    /**
+     * @param array $options
+     *
+     * @return string
+     */
+    public function getFileUrl(array $options = []);
 }
