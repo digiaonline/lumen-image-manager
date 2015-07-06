@@ -2,6 +2,7 @@
 
 use Nord\Lumen\FileManager\Contracts\File;
 use Nord\Lumen\ImageManager\Contracts\ImageFactory as ImageFactoryContract;
+use Nord\Lumen\ImageManager\Contracts\ImageManager;
 
 class ImageFactory implements ImageFactoryContract
 {
@@ -9,8 +10,8 @@ class ImageFactory implements ImageFactoryContract
     /**
      * @inheritdoc
      */
-    public function createImage(File $file, $renderer)
+    public function createImage(ImageManager $manager, File $file, $renderer)
     {
-        return new Image($file, $renderer);
+        return new Image($manager, $file, $renderer);
     }
 }

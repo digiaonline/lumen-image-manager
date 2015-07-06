@@ -6,10 +6,11 @@ interface ImageFactory
 {
 
     /**
-     * @param File   $file
-     * @param string $renderer
+     * @param ImageManager $manager
+     * @param File         $file
+     * @param string       $renderer
      *
      * @return Image
      */
-    public function createImage(File $file, $renderer);
+    public function createImage(ImageManager $manager, File $file, $renderer);
 }
