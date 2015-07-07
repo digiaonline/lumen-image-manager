@@ -10,6 +10,6 @@ class ImageManager extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Nord\Lumen\ImageManager\ImageManager';
+        return 'Nord\Lumen\ImageManager\Contracts\ImageManager';
     }
 }

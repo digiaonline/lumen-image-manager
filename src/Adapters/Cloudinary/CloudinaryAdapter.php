@@ -1,10 +1,11 @@
 <?php namespace Nord\Lumen\ImageManager\Adapters\Cloudinary;
 
 use Cloudinary;
+use Nord\Lumen\FileManager\Contracts\File;
 use Nord\Lumen\ImageManager\Contracts\Image;
-use Nord\Lumen\ImageManager\Contracts\RendererAdapter;
+use Nord\Lumen\ImageManager\Contracts\ManipulatorAdapter;
 
-class CloudinaryAdapter implements RendererAdapter
+class CloudinaryAdapter implements ManipulatorAdapter
 {
 
     /**
@@ -30,18 +31,9 @@ class CloudinaryAdapter implements RendererAdapter
     /**
      * @inheritdoc
      */
-    public function getImageUrl(Image $image, array $options)
+    public function getImageUrl($path, array $options)
     {
-        return cloudinary_url($image->getFilePath(), $options);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function renderImage(Image $image, array $options)
-    {
-        return cl_image_tag($image->getFilePath(), $options);
+        return cloudinary_url($path, $options);
     }
 
 
