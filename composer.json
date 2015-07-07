@@ -14,7 +14,7 @@
         "php": ">=5.5.9",
         "cloudinary/cloudinary_php": "~1.1@dev",
         "nordsoftware/lumen-doctrine": "~1.0@dev",
-        "nordsoftware/lumen-file-manager": "~0.1@dev"
+        "nordsoftware/lumen-file-manager": "~0.4@dev"
     },
     "require-dev": {
         "laravel/lumen-framework": "^5.2@dev"
