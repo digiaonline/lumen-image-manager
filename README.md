@@ -26,7 +26,7 @@ composer require nordsoftware/lumen-image-manager
 
 ### Bootstrapping
 
-**Please note that we only support Doctrine for now, but we plan to add Eloquent support soon.**
+**Please note that we only support Cloudinary for now.**
 
 Add the following lines to ```bootstrap/app.php```:
 
@@ -35,8 +35,7 @@ $app->register('Nord\Lumen\Cloudinary\CloudinaryServiceProvider');
 ```
 
 ```php
-$app->register('Nord\Lumen\ImageManager\Doctrine\DoctrineServiceProvider');
-$app->register('Nord\Lumen\ImageManager\FileManagerServiceProvider');
+$app->register('Nord\Lumen\ImageManager\ImageManagerServiceProvider');
 ```
 
 You can now use the ```ImageManager``` facade or inject the ```Nord\Lumen\ImageManager\Contracts\ImageManager``` where needed.
