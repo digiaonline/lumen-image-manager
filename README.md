@@ -12,6 +12,7 @@ Image manager for the Lumen PHP framework.
 
 - PHP 5.5.9 or newer
 - [Composer](http://getcomposer.org)
+- [FileManager](http://github.com/nordsoftware/lumen-file-manager)
 
 ## Usage
 
@@ -46,19 +47,14 @@ Below is an example of how to use this module to save an image from the request
 and return a JSON response with the saved image's ID and URLs.
 
 ```php
-public function uploadImage(Request $request, ImageManager $imageManager)
+public function uploadImage(Request $request, FileManager $fileManager, ImageManager $imageManager)
 {
     // Save the image directly to Cloudinary
-    $image = $imageManager->saveImage($request->file('upload'), 'avatar', ['disk' => 'cloudinary']);
+    $file = $fileManager->saveFile($request->file('upload'), ['disk' => 'cloudinary']);
 
     return Response::json([
-        'id'  => $image->getFileId(),
-        'url' => $imageManager->getImageUrl($image),
-        'variations' => [
-            'small'  => $imageManager->getImageUrl($image, ['transformation' => 'small']),
-            'medium' => $imageManager->getImageUrl($image, ['transformation' => 'medium']),
-            'large'  => $imageManager->getImageUrl($image, ['transformation' => 'large']),
-        ]
+        'id'  => $file->getId(),
+        'url' => $imageManager->getImageUrl($file, ['transformation' => 'small'])
     ]);
 }
 ```
