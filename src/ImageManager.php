@@ -2,13 +2,9 @@
 
 use Nord\Lumen\FileManager\Contracts\File;
 use Nord\Lumen\FileManager\Contracts\FileManager;
-use Nord\Lumen\ImageManager\Contracts\ImageFactory;
-use Nord\Lumen\ImageManager\Contracts\RendererAdapter;
-use Nord\Lumen\ImageManager\Contracts\Image as ImageContract;
+use Nord\Lumen\ImageManager\Contracts\ManipulatorAdapter;
 use Nord\Lumen\ImageManager\Contracts\ImageManager as ImageManagerContract;
-use Nord\Lumen\ImageManager\Contracts\ImageStorage;
 use Nord\Lumen\ImageManager\Exceptions\AdapterException;
-use Nord\Lumen\ImageManager\Exceptions\StorageException;
 use Symfony\Component\HttpFoundation\File\File as FileInfo;
 
 class ImageManager implements ImageManagerContract
@@ -20,17 +16,7 @@ class ImageManager implements ImageManagerContract
     private $fileManager;
 
     /**
-     * @var ImageFactory
-     */
-    private $factory;
-
-    /**
-     * @var ImageStorage
-     */
-    private $storage;
-
-    /**
-     * @var RendererAdapter[]
+     * @var ManipulatorAdapter[]
      */
     private $adapters = [];
 
@@ -38,117 +24,44 @@ class ImageManager implements ImageManagerContract
     /**
      * ImageManager constructor.
      *
-     * @param FileManager  $fileManager
-     * @param ImageFactory $factory
-     * @param ImageStorage $storage
+     * @param FileManager $fileManager
      */
-    public function __construct(FileManager $fileManager, ImageFactory $factory, ImageStorage $storage)
+    public function __construct(FileManager $fileManager)
     {
         $this->fileManager = $fileManager;
-        $this->factory     = $factory;
-        $this->storage     = $storage;
     }
 
 
     /**
      * @inheritdoc
      */
-    public function saveImage(FileInfo $info, array $options = [])
+    public function getImageUrl(File $file, array $options = [])
     {
-        if (!isset($options['disk'])) {
-            $options['disk'] = File::DISK_CLOUDINARY;
-        }
+        $path = $this->fileManager->getFilePath($file, $options);
 
-        $file = $this->fileManager->saveFile($info, $options);
-
-        $image = $this->factory->createImage(
-            $this,
-            $file,
-            array_pull($options, 'renderer', ImageContract::RENDERER_CLOUDINARY)
-        );
-
-        if (!$this->storage->saveImage($image)) {
-            throw new StorageException("Failed to insert image into database.");
-        }
-
-        return $image;
+        return $this->getManipulator($file->getDisk())->getImageUrl($path, $options);
     }
 
 
     /**
-     * @inheritdoc
+     * @param ManipulatorAdapter $manipulator
      */
-    public function getImage($fileId)
+    public function addAdapter(ManipulatorAdapter $manipulator)
     {
-        $file = $this->fileManager->getFile($fileId);
-
-        if ($file === null) {
-            return null;
-        }
-
-        return $this->storage->getImage($file);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getImagePath(ImageContract $image, array $options = [])
-    {
-        return $this->fileManager->getFilePath($image->getFile(), $options);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getImageUrl(ImageContract $image, array $options = [])
-    {
-        return $this->getAdapter($image->getRenderer())->getImageUrl($image, $options);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function renderImage(ImageContract $image, array $options = [])
-    {
-        return $this->getAdapter($image->getRenderer())->renderImage($image, $options);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function deleteImage(ImageContract $image, array $options = [])
-    {
-        $this->fileManager->deleteFile($image->getFile());
-
-        if (!$this->storage->deleteImage($image)) {
-            throw new StorageException("Failed to delete file from database.");
-        }
-    }
-
-
-    /**
-     * @param RendererAdapter $adapter
-     */
-    public function addAdapter(RendererAdapter $adapter)
-    {
-        $this->adapters[$adapter->getName()] = $adapter;
+        $this->adapters[$manipulator->getName()] = $manipulator;
     }
 
 
     /**
      * @param string $name
      *
-     * @return RendererAdapter
+     * @return ManipulatorAdapter
      * @throws AdapterException
      */
-    protected function getAdapter($name)
+    protected function getManipulator($name)
     {
         if (!isset($this->adapters[$name])) {
-            throw new AdapterException("Adapter for renderer '$name' not found.");
+            throw new AdapterException("Adapter for manipulator '$name' not found.");
         }
 
         return $this->adapters[$name];

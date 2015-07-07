@@ -58,10 +58,8 @@ class ImageManagerServiceProvider extends ServiceProvider
     protected function createManager(Container $container, ConfigRepository $config)
     {
         $fileManager = $container->make(FileManager::class);
-        $factory     = $container->make(ImageFactoryContract::class);
-        $storage     = $container->make(ImageStorageContract::class);
 
-        $imageManager = new ImageManager($fileManager, $factory, $storage);
+        $imageManager = new ImageManager($fileManager);
 
         $this->configureManager($imageManager, $container, $config->get('imagemanager', []));
 

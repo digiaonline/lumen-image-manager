@@ -1,5 +1,9 @@
 # lumen-image-manager
 
+[![Latest Stable Version](https://poser.pugx.org/nordsoftware/lumen-image-manager/version)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
+[![Total Downloads](https://poser.pugx.org/nordsoftware/lumen-image-manager/downloads)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
+[![License](https://poser.pugx.org/nordsoftware/lumen-image-manager/license)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
+
 Image manager for the Lumen PHP framework.
 
 **Please note that this module is still under active development.**
