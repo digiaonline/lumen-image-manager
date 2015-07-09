@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\File\File as FileInfo;
 class ImageManager implements ImageManagerContract
 {
 
+    const MANIPULATOR_CLOUDINARY = 'cloudinary';
+    const DEFAULT_MANIPULATOR    = self::MANIPULATOR_CLOUDINARY;
+
     /**
      * @var FileManager
      */
@@ -39,7 +42,9 @@ class ImageManager implements ImageManagerContract
     {
         $path = $this->fileManager->getFilePath($file, $options);
 
-        return $this->getManipulator($file->getDisk())->getImageUrl($path, $options);
+        $manipulator = array_pull($options, 'manipulator', self::DEFAULT_MANIPULATOR);
+
+        return $this->getManipulator($manipulator)->getImageUrl($path, $options);
     }
 
 
