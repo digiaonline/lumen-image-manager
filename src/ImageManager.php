@@ -5,7 +5,6 @@ use Nord\Lumen\FileManager\Contracts\FileManager;
 use Nord\Lumen\ImageManager\Contracts\ManipulatorAdapter;
 use Nord\Lumen\ImageManager\Contracts\ImageManager as ImageManagerContract;
 use Nord\Lumen\ImageManager\Exceptions\AdapterException;
-use Symfony\Component\HttpFoundation\File\File as FileInfo;
 
 class ImageManager implements ImageManagerContract
 {
