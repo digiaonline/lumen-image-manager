@@ -17,6 +17,9 @@
     "require-dev": {
         "laravel/lumen-framework": "v5.1.*"
     },
+    "suggest": {
+        "league/fractal": "Install to serialize files using ImageTransformer"
+    },
     "autoload": {
         "psr-4": {
             "Nord\\Lumen\\ImageManager\\": "src"
