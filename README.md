@@ -1,10 +1,11 @@
-# lumen-image-manager
+# Lumen Image Manager
 
+[![Code Climate](https://codeclimate.com/github/nordsoftware/lumen-image-manager/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/lumen-image-manager)
 [![Latest Stable Version](https://poser.pugx.org/nordsoftware/lumen-image-manager/version)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![Total Downloads](https://poser.pugx.org/nordsoftware/lumen-image-manager/downloads)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![License](https://poser.pugx.org/nordsoftware/lumen-image-manager/license)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 
-Image manager for the Lumen PHP framework.
+Image manager for the [Lumen PHP framework](http://lumen.laravel.com/).
 
 **Please note that this module is still under active development.**
 
@@ -60,10 +61,7 @@ public function uploadImage(Request $request, FileManager $fileManager, ImageMan
 
 ## Contributing
 
-Please note the following guidelines before submitting pull requests:
-
-- Use the [PSR-2 coding style](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-- Create pull requests for the *develop* branch
+Please read the [guidelines](.github/CONTRIBUTING.md).
 
 ## License
 
