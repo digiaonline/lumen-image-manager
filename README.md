@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/nordsoftware/lumen-image-manager/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/lumen-image-manager)
 [![Latest Stable Version](https://poser.pugx.org/nordsoftware/lumen-image-manager/version)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![Total Downloads](https://poser.pugx.org/nordsoftware/lumen-image-manager/downloads)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
-[![License](https://poser.pugx.org/nordsoftware/lumen-image-manager/license)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Image manager for the [Lumen PHP framework](http://lumen.laravel.com/).
 
