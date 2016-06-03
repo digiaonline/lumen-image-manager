@@ -12,7 +12,6 @@ use Nord\Lumen\ImageManager\Adapters\Cloudinary\CloudinaryAdapter;
 
 class ImageManagerServiceProvider extends ServiceProvider
 {
-
     private static $defaultAdapters = [
         ['class' => CloudinaryAdapter::class],
     ];

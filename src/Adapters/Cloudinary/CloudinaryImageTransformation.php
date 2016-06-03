@@ -2,7 +2,6 @@
 
 class CloudinaryImageTransformation
 {
-
     const CROP_SCALE               = 'scale';
     const CROP_FILL                = 'fill';
     const CROP_LFILL               = 'fill';
