@@ -8,7 +8,6 @@ use Nord\Lumen\ImageManager\Exceptions\AdapterException;
 
 class ImageManager implements ImageManagerContract
 {
-
     const MANIPULATOR_CLOUDINARY = 'cloudinary';
     const DEFAULT_MANIPULATOR    = self::MANIPULATOR_CLOUDINARY;
 

@@ -2,7 +2,6 @@
 
 class CloudinaryUploadParameters
 {
-
     const RESOURCE_TYPE_IMAGE              = 'image';
     const RESOURCE_TYPE_RAW                = 'raw';
     const RESOURCE_TYPE_AUTO               = 'auto';
