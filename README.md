@@ -1,6 +1,7 @@
 # Lumen Image Manager
 
 [![Code Climate](https://codeclimate.com/github/nordsoftware/lumen-image-manager/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/lumen-image-manager)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/lumen-image-manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/lumen-image-manager/?branch=master)
 [![StyleCI](https://styleci.io/repos/38572488/shield?style=flat)](https://styleci.io/repos/38572488)
 [![Latest Stable Version](https://poser.pugx.org/nordsoftware/lumen-image-manager/version)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![Total Downloads](https://poser.pugx.org/nordsoftware/lumen-image-manager/downloads)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
