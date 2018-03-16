@@ -6,7 +6,6 @@
 [![Latest Stable Version](https://poser.pugx.org/nordsoftware/lumen-image-manager/version)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![Total Downloads](https://poser.pugx.org/nordsoftware/lumen-image-manager/downloads)](https://packagist.org/packages/nordsoftware/lumen-image-manager)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Gitter](https://img.shields.io/gitter/room/norsoftware/open-source.svg?maxAge=2592000)](https://gitter.im/nordsoftware/open-source)
 
 Image manager for the [Lumen PHP framework](http://lumen.laravel.com/).
 
